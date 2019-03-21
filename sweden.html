@@ -31,9 +31,7 @@
         <div class="hero">
 
             <h1 class="type-text">
-                <a href="" class="typewrite" data-period="2000" data-type='[ "Are you Ready?", "To Experience Sweden", "Like You&#39;ve Never Seen Before?"]'>
-                        <span class="wrap"></span>
-                        </a>
+                <span class="txt-rotate" data-period="2000" data-rotate='[ "Are you Ready?", "To Experience Sweden?"]'></span>
             </h1>
         </div>
         <div id="main-buttons">
@@ -47,8 +45,7 @@
     </header>
 
     <script>
-        // Overlay on video - typewriter script
-        var TxtType = function(el, toRotate, period) {
+        var TxtRotate = function(el, toRotate, period) {
             this.toRotate = toRotate;
             this.el = el;
             this.loopNum = 0;
@@ -58,7 +55,7 @@
             this.isDeleting = false;
         };
 
-        TxtType.prototype.tick = function() {
+        TxtRotate.prototype.tick = function() {
             var i = this.loopNum % this.toRotate.length;
             var fullTxt = this.toRotate[i];
 
@@ -72,7 +69,7 @@
             this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
 
             var that = this;
-            var delta = 200 - Math.random() * 100;
+            var delta = 300 - Math.random() * 100;
 
             if (this.isDeleting) { delta /= 2; }
 
@@ -92,18 +89,18 @@
         };
 
         window.onload = function() {
-            var elements = document.getElementsByClassName('typewrite');
+            var elements = document.getElementsByClassName('txt-rotate');
             for (var i = 0; i < elements.length; i++) {
-                var toRotate = elements[i].getAttribute('data-type');
+                var toRotate = elements[i].getAttribute('data-rotate');
                 var period = elements[i].getAttribute('data-period');
                 if (toRotate) {
-                    new TxtType(elements[i], JSON.parse(toRotate), period);
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
                 }
             }
             // INJECT CSS
             var css = document.createElement("style");
             css.type = "text/css";
-            css.innerHTML = ".typewrite > .wrap { }";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
             document.body.appendChild(css);
         };
     </script>
